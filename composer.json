@@ -32,6 +32,11 @@
             ]
         }
     },
+    "scripts": {
+        "post-install-cmd": [
+            "cd vendor/savelend/ploi-deployer && npm install && npm run build"
+        ]
+    },
     "minimum-stability": "dev",
     "prefer-stable": true
 }
