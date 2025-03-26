@@ -2,7 +2,6 @@ node_modules
 vendor
 composer.lock
 .phpunit.result.cache
-/resources/dist/
 .DS_Store
 composer.lock
 package-lock.json
