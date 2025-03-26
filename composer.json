@@ -1,0 +1,37 @@
+{
+    "name": "savelend/ploi-deployer",
+    "autoload": {
+        "psr-4": {
+            "Savelend\\PloiDeployer\\": "src"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Savelend\\PloiDeployer\\Tests\\": "tests"
+        }
+    },
+    "require": {
+        "statamic/cms": "^5.0"
+    },
+    "require-dev": {
+        "orchestra/testbench": "^9.0"
+    },
+    "config": {
+        "allow-plugins": {
+            "pixelfear/composer-dist-plugin": true
+        }
+    },
+    "extra": {
+        "statamic": {
+            "name": "Ploi Deployer",
+            "description": "Ploi Deployer addon"
+        },
+        "laravel": {
+            "providers": [
+                "Savelend\\PloiDeployer\\ServiceProvider"
+            ]
+        }
+    },
+    "minimum-stability": "dev",
+    "prefer-stable": true
+}
