@@ -32,12 +32,6 @@
             ]
         }
     },
-    "scripts": {
-        "post-install-cmd": [
-            "mkdir -p vendor/savelend/ploi-deployer/resources/dist",
-            "cd vendor/savelend/ploi-deployer && npm install && npm run build"
-        ]
-    },
     "minimum-stability": "dev",
     "prefer-stable": true
 }
