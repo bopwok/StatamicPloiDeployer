@@ -7,7 +7,6 @@ export default defineConfig({
         laravel({
             input: [
                 'resources/js/cp.js',
-                'resources/js/confetti.min.js',
             ],
             publicDirectory: 'resources/dist',
         }),

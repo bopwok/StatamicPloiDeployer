@@ -6,6 +6,7 @@
         </div>
 
         <button 
+            id="ploi-confetti-target"
             class="btn-primary" 
             @click="deploy" 
             :disabled="loading || !hasConfig"
@@ -21,7 +22,7 @@
 </template>
 
 <script>
-import "../confetti.min.js"; // exposes window.confetti from confettijs.org
+import Confetti from "../confetti.min.js";
 
 export default {
     props: {
@@ -36,14 +37,30 @@ export default {
             loading: false,
             message: '',
             success: false,
-            configRoute: Statamic.$config.get('routes.ploi-deployer.config.index')
+            configRoute: Statamic.$config.get('routes.ploi-deployer.config.index'),
+            confettiInstance: null,
         };
+    },
+
+    mounted() {
+        if (typeof Confetti === 'function') {
+            try {
+                this.confettiInstance = new Confetti('ploi-confetti-target');
+                // Configure to your preferred defaults
+                this.confettiInstance.setCount(175);
+                this.confettiInstance.setPower(30);
+                this.confettiInstance.setSize(1);
+                this.confettiInstance.setFade(false);
+                this.confettiInstance.destroyTarget(false); // don't hide the button
+            } catch (e) {
+                // no-op if instantiation fails
+            }
+        }
     },
     
     methods: {
         deploy() {
             // fire confetti immediately on click
-            this.confettiBurst();
 
             this.loading = true;
             this.message = '';
@@ -64,17 +81,6 @@ export default {
                 });
         },
 
-        confettiBurst() {
-            // guard if the script hasn't loaded for any reason
-            if (typeof window !== 'undefined' && typeof window.confetti === 'function') {
-                window.confetti({
-                    particleCount: 140,
-                    spread: 70,
-                    startVelocity: 55,
-                    origin: { y: 0.6 }
-                });
-            }
-        }
     }
 }
 </script>
