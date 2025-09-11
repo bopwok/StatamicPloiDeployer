@@ -21,6 +21,8 @@
 </template>
 
 <script>
+import "../confetti.min.js"; // exposes window.confetti from confettijs.org
+
 export default {
     props: {
         hasConfig: {
@@ -40,12 +42,18 @@ export default {
     
     methods: {
         deploy() {
+            // fire confetti immediately on click
+            this.confettiBurst();
+
             this.loading = true;
             this.message = '';
             this.$axios.post(cp_url('ploi-deployer/deploy'))
                 .then(response => {
                     this.success = true;
                     this.message = response.data.message;
+
+                    // optional: celebrate success again
+                    // this.confettiBurst();
                 })
                 .catch(error => {
                     this.success = false;
@@ -54,6 +62,18 @@ export default {
                 .finally(() => {
                     this.loading = false;
                 });
+        },
+
+        confettiBurst() {
+            // guard if the script hasn't loaded for any reason
+            if (typeof window !== 'undefined' && typeof window.confetti === 'function') {
+                window.confetti({
+                    particleCount: 140,
+                    spread: 70,
+                    startVelocity: 55,
+                    origin: { y: 0.6 }
+                });
+            }
         }
     }
 }
