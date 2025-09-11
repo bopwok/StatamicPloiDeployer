@@ -1,4 +1,9 @@
 {
+  "resources/js/confetti.min.js": {
+    "file": "assets/confetti.min-4ed993c7.js",
+    "isEntry": true,
+    "src": "resources/js/confetti.min.js"
+  },
   "resources/js/cp.js": {
     "file": "assets/cp-8d7e0942.js",
     "isEntry": true,
