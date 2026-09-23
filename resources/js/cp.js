@@ -1,3 +1,8 @@
 import PloiDeployerComponent from './components/PloiDeployerComponent.vue';
 
-Statamic.$components.register('ploi-deployer-component', PloiDeployerComponent);
+Statamic.booting(() => {
+    Statamic.$components.register(
+        'ploi-deployer-component',
+        PloiDeployerComponent
+    );
+});
