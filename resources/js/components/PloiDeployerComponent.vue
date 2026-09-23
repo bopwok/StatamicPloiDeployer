@@ -50,27 +50,27 @@ export default {
     },
 
     methods: {
-        deploy() {
-            this.loading = true;
-            this.message = '';
+    deploy() {
+        this.loading = true;
 
-            this.$axios
-                .post(cp_url('ploi-deployer/deploy'))
-                .then(response => {
-                    this.success = true;
-                    this.message = response.data.message;
-                })
-                .catch(error => {
-                    this.success = false;
-                    this.message =
-                        error.response?.data?.message ||
-                        'An error occurred during deployment.';
-                })
-                .finally(() => {
-                    this.loading = false;
-                });
-        },
+        this.$axios
+            .post(cp_url('ploi-deployer/deploy'))
+            .then(response => {
+                this.$toast.success(
+                    response.data.message || 'Deployment started.'
+                );
+            })
+            .catch(error => {
+                this.$toast.error(
+                    error.response?.data?.message ||
+                    'An error occurred during deployment.'
+                );
+            })
+            .finally(() => {
+                this.loading = false;
+            });
     },
+}
 };
 </script>
 
@@ -92,26 +92,15 @@ export default {
                 </a>
             </div>
 
-            <button
-                id="ploi-confetti-target"
-                class="btn-primary"
-                @click="deploy"
-                :disabled="loading || !hasConfig"
-            >
-                <span v-if="loading">Deploying...</span>
-                <span v-else>Deploy to Production</span>
-            </button>
+            <ui-button
+    id="ploi-confetti-target"
+    variant="primary"
+    :disabled="loading || !hasConfig"
+    @click="deploy"
+>
+    {{ loading ? 'Deploying...' : 'Deploy to Production' }}
+</ui-button>
 
-            <div
-                v-if="message"
-                class="mt-2"
-                :class="{
-                    'text-green-500': success,
-                    'text-red-500': !success
-                }"
-            >
-                {{ message }}
-            </div>
 
         </div>
     </Widget>
