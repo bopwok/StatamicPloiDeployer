@@ -15,15 +15,15 @@ class PloiDeployer extends Widget
      *
      * @return string|\Illuminate\View\View
      */
-    public function html()
-    {
-        $config = PloiConfig::all();
+    public function component()
+        {
+            $config = PloiConfig::all();
 
-        return view('savelend.ploi-deployer::widgets.ploi-deployer', [
-            'title' => 'Deploy to Production',
-            'hasConfig' => isset($config['api_key']) && !empty($config['api_key']),
-        ]);
-    }
+            return VueComponent::render('ploi-deployer-component', [
+                'title' => 'Deploy to Production',
+                'hasConfig' => !empty($config['api_key']),
+            ]);
+        }
 
     /**
      * The widget's title
