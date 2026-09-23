@@ -4,6 +4,7 @@ namespace Savelend\PloiDeployer\Widgets;
 
 use Statamic\Widgets\Widget;
 use Savelend\PloiDeployer\Facades\PloiConfig;
+use Statamic\Widgets\VueComponent;
 
 class PloiDeployer extends Widget
 {
